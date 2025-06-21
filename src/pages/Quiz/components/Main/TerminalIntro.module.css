@@ -1,0 +1,10 @@
+.terminal {
+  color: #0f0;
+  font-family: "Fira Mono", monospace;
+  padding: 1rem;
+  min-height: 300px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  position: relative;
+}
