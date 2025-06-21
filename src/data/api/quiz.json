@@ -1,0 +1,164 @@
+{
+  "quiz": [
+    {
+      "id": 1,
+      "level": "beginner",
+      "question": "Which of the following is a strong password?",
+      "options": ["123456", "qwerty", "MyDog2023!", "password"],
+      "answer": "MyDog2023!"
+    },
+    {
+      "id": 2,
+      "level": "beginner",
+      "question": "What is a phishing attack?",
+      "options": [
+        "Downloading a virus-infected file",
+        "Stealing data through fake emails",
+        "Storing personal data on a server",
+        "Installing a firewall"
+      ],
+      "answer": "Stealing data through fake emails"
+    },
+    {
+      "id": 3,
+      "level": "beginner",
+      "question": "What is the purpose of HTTPS?",
+      "options": [
+        "To load websites faster",
+        "To secure communication between browser and server",
+        "To allow file downloads",
+        "To display ads"
+      ],
+      "answer": "To secure communication between browser and server"
+    },
+    {
+      "id": 4,
+      "level": "beginner",
+      "question": "Which one is an example of two-factor authentication?",
+      "options": [
+        "Using a password and a username",
+        "Using a password and a fingerprint",
+        "Using two passwords",
+        "Using two usernames"
+      ],
+      "answer": "Using a password and a fingerprint"
+    },
+    {
+      "id": 5,
+      "level": "beginner",
+      "question": "Which device protects a network from unauthorized access?",
+      "options": ["Router", "Firewall", "Modem", "Switch"],
+      "answer": "Firewall"
+    },
+    {
+      "id": 6,
+      "level": "intermediate",
+      "question": "What does the principle of least privilege mean?",
+      "options": [
+        "Giving users all possible permissions",
+        "Giving users access only to the resources they need",
+        "Blocking all users by default",
+        "Assigning roles randomly"
+      ],
+      "answer": "Giving users access only to the resources they need"
+    },
+    {
+      "id": 7,
+      "level": "intermediate",
+      "question": "What is SQL injection?",
+      "options": [
+        "Injecting malicious code into a website",
+        "A type of DoS attack",
+        "Manipulating database queries via input fields",
+        "Attacking network firewalls"
+      ],
+      "answer": "Manipulating database queries via input fields"
+    },
+    {
+      "id": 8,
+      "level": "intermediate",
+      "question": "Which of the following is NOT a form of malware?",
+      "options": ["Ransomware", "Spyware", "Firewall", "Trojan"],
+      "answer": "Firewall"
+    },
+    {
+      "id": 9,
+      "level": "intermediate",
+      "question": "What does 'brute force attack' mean?",
+      "options": [
+        "An attacker physically damages hardware",
+        "An attacker tries all possible password combinations",
+        "An attacker sends phishing emails",
+        "An attacker crashes the server"
+      ],
+      "answer": "An attacker tries all possible password combinations"
+    },
+    {
+      "id": 10,
+      "level": "intermediate",
+      "question": "What is the purpose of a VPN?",
+      "options": [
+        "To increase internet speed",
+        "To access websites more easily",
+        "To create a secure connection over the internet",
+        "To download files anonymously"
+      ],
+      "answer": "To create a secure connection over the internet"
+    },
+    {
+      "id": 11,
+      "level": "advanced",
+      "question": "What is a zero-day vulnerability?",
+      "options": [
+        "A bug that has existed for 0 days",
+        "A newly discovered vulnerability with no known patch",
+        "A vulnerability fixed on the same day",
+        "An outdated security patch"
+      ],
+      "answer": "A newly discovered vulnerability with no known patch"
+    },
+    {
+      "id": 12,
+      "level": "advanced",
+      "question": "What is the function of a security sandbox?",
+      "options": [
+        "To scan for malware",
+        "To isolate untrusted code from the system",
+        "To monitor user activity",
+        "To encrypt files"
+      ],
+      "answer": "To isolate untrusted code from the system"
+    },
+    {
+      "id": 13,
+      "level": "advanced",
+      "question": "What type of attack does a CAPTCHA help to prevent?",
+      "options": [
+        "Phishing",
+        "Brute force login attempts by bots",
+        "Keylogging",
+        "Man-in-the-middle"
+      ],
+      "answer": "Brute force login attempts by bots"
+    },
+    {
+      "id": 14,
+      "level": "advanced",
+      "question": "Which protocol is more secure for sending emails?",
+      "options": ["SMTP", "IMAP", "POP3", "SMTPS"],
+      "answer": "SMTPS"
+    },
+    {
+      "id": 15,
+      "level": "advanced",
+      "question": "What does an IDS (Intrusion Detection System) do?",
+      "options": [
+        "Blocks all incoming traffic",
+        "Detects suspicious activity in a network",
+        "Encrypts all files",
+        "Creates firewalls"
+      ],
+      "answer": "Detects suspicious activity in a network"
+    }
+  ]
+}
