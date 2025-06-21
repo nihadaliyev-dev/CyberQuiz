@@ -1,2 +1,0 @@
-# CyberQuiz
-Quiz UI/UX
