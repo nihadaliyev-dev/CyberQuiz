@@ -1,57 +1,706 @@
 .form {
-  background: black;
-  box-shadow: 0px 0px 12px gray;
-  position: absolute;
+  background: #0a0a0a;
+  border: 2px solid #00ff00;
+  box-shadow: 0px 0px 20px rgba(0, 255, 0, 0.3);
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 2dvh 1.5dvw;
-  max-width: 50%;
-  width: 50dvw;
-  max-height: 90%;
-  transition: width ease-in-out 0.2s;
+  padding: 1.5rem;
+  max-width: 90vw;
+  width: 90vw;
+  max-height: 95vh;
+  height: auto;
+  font-family: "Fira Code", "Courier New", monospace;
+  color: #00ff00;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  z-index: 9999;
+}
+
+.form_main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9998;
+  background: rgba(0, 0, 0, 0.8);
 }
 
 .questionMain {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 1rem;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.5rem;
 }
-.questionHeader {
-  font-size: 18px;
-}
-.answers {
+
+.terminalHeader {
   display: flex;
-  gap: 8px;
-  padding: 10px;
-  margin: 5px 0;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #00ff00;
+  margin-bottom: 0.5rem;
+  flex-shrink: 0;
 }
 
-.answers:hover {
-  border-color: #0f0;
+.prompt {
+  color: #00ff00;
+  font-weight: bold;
 }
 
-.answers input[type="radio"]:checked ~ .answers {
-  background-color: #0f0;
-  color: #0f0;
-  border-color: #0f0;
+.command {
+  color: #ffffff;
+  font-style: italic;
 }
 
-.answers.selected {
-  color: #0f0;
-  border-color: #0f0;
-}
-
-.buttons {
+.progressContainer {
   display: flex;
-  padding: 10px;
-  margin: 5px 0;
-  border: 2px solid #ccc;
-  border-radius: 5px;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.progressBar {
+  width: 100%;
+  height: 6px;
+  background: #1a1a1a;
+  border: 1px solid #00ff00;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #00ff00, #00cc00);
+  transition: width 0.3s ease;
+}
+
+.progressText {
+  font-size: 0.85rem;
+  color: #cccccc;
+  text-align: center;
+}
+
+.questionContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.questionPrompt {
+  font-weight: bold;
+  color: #00ff00;
+}
+
+.questionText {
+  font-size: 1rem;
+  line-height: 1.4;
+  color: #ffffff;
+  padding: 0.75rem;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 4px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.optionsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.optionsPrompt {
+  font-weight: bold;
+  color: #00ff00;
+}
+
+.optionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  background: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 4px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  min-height: 44px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.option:hover {
+  border-color: #00ff00;
+  background: #2a2a2a;
+  transform: translateX(5px);
+}
+
+.option.selected {
+  border-color: #00ff00;
+  background: #1a3a1a;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.optionLetter {
+  color: #00ff00;
+  font-weight: bold;
+  min-width: 25px;
+  flex-shrink: 0;
+}
+
+.optionText {
+  color: #ffffff;
+  flex: 1;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-top: 1px solid #333;
+  margin-top: 0.75rem;
+  flex-shrink: 0;
+}
+
+.navLeft,
+.navRight {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: #1a1a1a;
+  border: 2px solid #00ff00;
+  border-radius: 4px;
+  color: #00ff00;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: "Fira Code", "Courier New", monospace;
+  font-size: 0.85rem;
+  font-weight: bold;
+  min-height: 44px;
+  white-space: nowrap;
+}
+
+.navButton:hover:not(.disabled) {
+  background: #00ff00;
+  color: #000000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 255, 0, 0.3);
+}
+
+.navButton.disabled {
+  border-color: #666;
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.navButton.disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.keyBinding {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.statusBar {
+  padding: 0.5rem 0.75rem;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 4px;
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.statusText {
+  font-size: 0.85rem;
+  color: #cccccc;
+}
+
+.keyboardHints {
+  font-size: 0.75rem;
+  color: #888;
+  border-top: 1px solid #333;
+  padding-top: 0.5rem;
+  font-style: italic;
+}
+
+.consoleTimer {
+  background: #1a1a1a;
+  border: 2px solid #00ff00;
+  border-radius: 4px;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  font-family: "Fira Code", "Courier New", monospace;
+  animation: timerPulse 2s infinite;
+  flex-shrink: 0;
+}
+
+.timerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid #333;
+  padding-bottom: 0.5rem;
+}
+
+.timerStatus {
+  color: #00ff00;
+  font-weight: bold;
+  animation: blink 1s infinite;
+}
+
+.timerDisplay {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.timerLabel {
+  color: #cccccc;
+}
+
+.timerValue {
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-shadow: 0 0 10px currentColor;
+  animation: timerGlow 1s ease-in-out infinite alternate;
+}
+
+.timerWarning {
+  margin-top: 0.5rem;
+  color: #ff0000;
+  font-weight: bold;
+  text-align: center;
+  animation: warningBlink 0.5s infinite;
+  background: rgba(255, 0, 0, 0.1);
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ff0000;
+}
+
+.resultsModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.resultsContent {
+  background: #0a0a0a;
+  border: 2px solid #00ff00;
+  box-shadow: 0px 0px 30px rgba(0, 255, 0, 0.5);
+  padding: 1.5rem;
+  max-width: 90vw;
+  width: 90vw;
+  max-height: 90vh;
+  border-radius: 8px;
+  font-family: "Fira Code", "Courier New", monospace;
+  color: #00ff00;
+  animation: slideIn 0.5s ease-out;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 10001;
+}
+
+.scoreContainer {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+.scoreCircle {
+  width: 150px;
+  height: 150px;
+  border: 4px solid #00ff00;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #1a1a1a;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+  animation: pulse 2s infinite;
+}
+
+.scorePercentage {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 10px currentColor;
+}
+
+.scoreLabel {
+  font-size: 0.9rem;
+  color: #cccccc;
+  letter-spacing: 2px;
+}
+
+/* Results Summary */
+.resultsSummary {
+  margin: 1.5rem 0;
+  padding: 0.75rem;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 4px;
+}
+
+.resultRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #333;
+}
+
+.resultRow:last-child {
+  border-bottom: none;
+}
+
+.resultLabel {
+  color: #cccccc;
+  font-size: 0.85rem;
+}
+
+.resultValue {
+  color: #00ff00;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.scoreMessage {
+  text-align: center;
+  padding: 0.75rem;
+  margin: 1rem 0;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 4px;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: #ffffff;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Action Buttons */
+.resultsActions {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.resultsButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: #1a1a1a;
+  border: 2px solid #00ff00;
+  border-radius: 4px;
+  color: #00ff00;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: "Fira Code", "Courier New", monospace;
+  font-size: 0.85rem;
+  font-weight: bold;
+  min-height: 44px;
+}
+
+.resultsButton:hover {
+  background: #00ff00;
+  color: #000000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 255, 0, 0.3);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+  }
+}
+
+@keyframes timerPulse {
+  0% {
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+  }
+}
+
+@keyframes timerGlow {
+  from {
+    text-shadow: 0 0 10px currentColor;
+  }
+  to {
+    text-shadow: 0 0 20px currentColor, 0 0 30px currentColor;
+  }
+}
+
+@keyframes warningBlink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0.5;
+  }
+}
+
+@media (max-width: 768px) {
+  .form {
+    width: 95vw;
+    max-width: 95vw;
+    padding: 1rem;
+    max-height: 98vh;
+  }
+
+  .questionMain {
+    gap: 0.75rem;
+    max-height: 95vh;
+  }
+
+  .questionText {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+
+  .option {
+    padding: 0.5rem 0.6rem;
+    font-size: 0.85rem;
+    min-height: 40px;
+  }
+
+  .navigation {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .navLeft,
+  .navRight {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .navButton {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    min-height: 40px;
+  }
+
+  .consoleTimer {
+    padding: 0.6rem;
+  }
+
+  .timerDisplay {
+    font-size: 1rem;
+  }
+
+  .timerValue {
+    font-size: 1.1rem;
+  }
+
+  .resultsContent {
+    padding: 1rem;
+    width: 95vw;
+    max-height: 95vh;
+  }
+
+  .scoreCircle {
+    width: 120px;
+    height: 120px;
+  }
+
+  .scorePercentage {
+    font-size: 2rem;
+  }
+
+  .scoreLabel {
+    font-size: 0.8rem;
+  }
+
+  .keyboardHints {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .form {
+    width: 98vw;
+    max-width: 98vw;
+    padding: 0.75rem;
+  }
+
+  .questionMain {
+    gap: 0.5rem;
+  }
+
+  .questionText {
+    font-size: 0.85rem;
+    padding: 0.5rem;
+  }
+
+  .option {
+    padding: 0.4rem 0.5rem;
+    font-size: 0.8rem;
+    min-height: 36px;
+  }
+
+  .navButton {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+    min-height: 36px;
+  }
+
+  .consoleTimer {
+    padding: 0.5rem;
+  }
+
+  .timerDisplay {
+    font-size: 0.9rem;
+  }
+
+  .timerValue {
+    font-size: 1rem;
+  }
+
+  .scoreCircle {
+    width: 100px;
+    height: 100px;
+  }
+
+  .scorePercentage {
+    font-size: 1.5rem;
+  }
+
+  .scoreLabel {
+    font-size: 0.7rem;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (max-height: 600px) and (orientation: landscape) {
+  .form {
+    max-height: 98vh;
+    padding: 0.75rem;
+  }
+
+  .questionMain {
+    gap: 0.5rem;
+    max-height: 95vh;
+  }
+
+  .consoleTimer {
+    padding: 0.5rem;
+    margin: 0.25rem 0;
+  }
+
+  .timerDisplay {
+    font-size: 0.9rem;
+  }
+
+  .timerValue {
+    font-size: 1rem;
+  }
+
+  .option {
+    padding: 0.4rem 0.6rem;
+    min-height: 32px;
+  }
+
+  .navButton {
+    padding: 0.4rem 0.8rem;
+    min-height: 32px;
+  }
 }
