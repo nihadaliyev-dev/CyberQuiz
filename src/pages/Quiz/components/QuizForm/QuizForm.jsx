@@ -1,123 +1,147 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import styles from "./QuizForm.module.css";
+import { QuizFormContent, QuizResults } from "./index";
+import { useQuizLogic } from "./useQuizLogic";
+import { useQuizKeyboard } from "./useQuizKeyboard";
 
-const QuizForm = ({ quizStatus, questions }) => {
-  const [questionNumber, setQuestionNumber] = useState(0);
-  const [activeQuestion, setActiveQuestion] = useState(null);
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
+const QuizForm = ({
+  quizStatus,
+  questions,
+  quizResults: externalQuizResults,
+  onQuizFinish,
+  onQuizProgress,
+  onQuizReset,
+}) => {
+  const {
+    questionNumber,
+    activeQuestion,
+    selectedAnswer,
+    isLastQuestion,
+    showResults,
+    quizResults,
+    timeLeft,
+    timerActive,
+    progressPercentage,
+    answeredCount,
+    totalQuestions,
+    handleAnswerSelect,
+    previousQuestion,
+    nextQuestion,
+    finishQuiz,
+    closeResults,
+    closeCompletedResults,
+    canProceed,
+    cycleAnswerUp,
+    cycleAnswerDown,
+  } = useQuizLogic({
+    quizStatus,
+    questions,
+    onQuizFinish,
+    onQuizProgress,
+  });
 
-  // Set active question when questions are loaded and quiz is active
-  useEffect(() => {
-    if (quizStatus === "active" && questions && questions.length > 0) {
-      setActiveQuestion(questions[0]);
-      setQuestionNumber(0);
-      setSelectedAnswer(null);
-    }
-  }, [quizStatus, questions]);
+  useQuizKeyboard({
+    quizStatus,
+    activeQuestion,
+    showResults,
+    closeResults,
+    previousQuestion,
+    nextQuestion,
+    finishQuiz,
+    canProceed,
+    isLastQuestion,
+    handleAnswerSelect,
+    questionNumber,
+    cycleAnswerUp,
+    cycleAnswerDown,
+  });
 
-  // Update active question when questionNumber changes
-  useEffect(() => {
-    if (
-      questions &&
-      questions.length > 0 &&
-      questionNumber >= 0 &&
-      questionNumber < questions.length
-    ) {
-      setActiveQuestion(questions[questionNumber]);
-      setSelectedAnswer(null);
-    }
-  }, [questionNumber, questions]);
+  const finalQuizResults =
+    quizStatus === "completed" ? externalQuizResults : quizResults;
 
-  const handleAnswerSelect = (answer) => {
-    setSelectedAnswer(answer);
-  };
+  if (!activeQuestion && quizStatus !== "completed") {
+    return null;
+  }
 
-  // Helper function to convert index to letter
-  const getOptionLetter = (index) => {
-    switch (index + 1) {
-      case 1:
-        return "A";
-      case 2:
-        return "B";
-      case 3:
-        return "C";
-      case 4:
-        return "D";
-      default:
-        return String.fromCharCode(65 + index);
-    }
-  };
-
-  const previousQuestion = () => {
-    if (questionNumber > 0) {
-      setQuestionNumber((q) => q - 1);
-    }
-  };
-
-  const nextQuestion = () => {
-    if (questionNumber < questions.length - 1) {
-      setQuestionNumber((q) => q + 1);
-    }
-  };
-
-  console.log("Question Number:", questionNumber);
-  console.log("Active Question:", activeQuestion);
-  console.log("Selected Answer:", selectedAnswer);
+  if (quizStatus === "completed" && finalQuizResults) {
+    return (
+      <div className={styles.form_main}>
+        <QuizResults
+          results={finalQuizResults}
+          onClose={() => {
+            closeCompletedResults();
+            if (onQuizReset) {
+              onQuizReset();
+            }
+          }}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className={styles.form_main}>
       <div
         className={styles.form}
-        style={{ display: quizStatus === "active" ? "block" : "none" }}
+        style={{ display: !showResults ? "block" : "none" }}
       >
-        {activeQuestion && (
-          <div className={styles.questionMain}>
-            <h3>Question {questionNumber + 1}.</h3>
-            <p className={styles.questionHeader}>{activeQuestion.question}</p>
-            {activeQuestion.options && (
-              <div
-                style={{ display: "flex", flexDirection: "column", gap: "4px" }}
-              >
-                {activeQuestion.options.map((option, index) => (
-                  <div
-                    key={index}
-                    className={`${styles.answers} ${
-                      selectedAnswer === option ? styles.selected : ""
-                    }`}
-                    onClick={() => handleAnswerSelect(option)}
-                  >
-                    <p>{"[" + getOptionLetter(index) + "]"}</p>
-                    <input
-                      style={{ display: "none" }}
-                      type="radio"
-                      name={`question-${activeQuestion.id}`}
-                      value={option}
-                      id={`option-${index}`}
-                      checked={selectedAnswer === option}
-                      onChange={() => handleAnswerSelect(option)}
-                    />
-                    <label htmlFor={`option-${index}`}>{option}</label>
-                  </div>
-                ))}
-              </div>
-            )}
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              {questionNumber > 0 && (
-                <button onClick={previousQuestion} className={styles.buttons}>
-                  Previous
-                </button>
-              )}
-              {questionNumber < questions.length - 1 && (
-                <button onClick={nextQuestion} className={styles.buttons}>
-                  Next
-                </button>
-              )}
-            </div>
-          </div>
-        )}
+        <QuizFormContent
+          questionNumber={questionNumber}
+          timeLeft={timeLeft}
+          timerActive={timerActive}
+          progressPercentage={progressPercentage}
+          totalQuestions={totalQuestions}
+          answeredCount={answeredCount}
+          activeQuestion={activeQuestion}
+          selectedAnswer={selectedAnswer}
+          isLastQuestion={isLastQuestion}
+          canProceed={canProceed}
+          onAnswerSelect={handleAnswerSelect}
+          onPrevious={previousQuestion}
+          onNext={nextQuestion}
+          onFinish={finishQuiz}
+        />
       </div>
+
+      {showResults && finalQuizResults && (
+        <QuizResults
+          results={finalQuizResults}
+          onClose={closeCompletedResults}
+        />
+      )}
     </div>
   );
+};
+
+QuizForm.propTypes = {
+  quizStatus: PropTypes.oneOf(["passive", "active", "completed"]).isRequired,
+  questions: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      question: PropTypes.string.isRequired,
+      options: PropTypes.arrayOf(PropTypes.string).isRequired,
+      answer: PropTypes.string.isRequired,
+      category: PropTypes.string,
+      difficulty: PropTypes.string,
+    })
+  ),
+  quizResults: PropTypes.shape({
+    correctCount: PropTypes.number,
+    answeredQuestions: PropTypes.number,
+    totalQuestions: PropTypes.number,
+    score: PropTypes.number,
+    timeUsed: PropTypes.number,
+  }),
+  onQuizFinish: PropTypes.func.isRequired,
+  onQuizProgress: PropTypes.func,
+  onQuizReset: PropTypes.func,
+};
+
+QuizForm.defaultProps = {
+  questions: [],
+  onQuizProgress: () => {},
+  onQuizReset: () => {},
 };
 
 export default QuizForm;

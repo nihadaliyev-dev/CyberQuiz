@@ -1,0 +1,676 @@
+/* Home Container - Optimized */
+.homeContainer {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+  font-family: "Fira Code", "Courier New", monospace;
+  color: #ffffff;
+  will-change: transform;
+}
+
+/* Animated Background - Optimized */
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.gridOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(rgba(0, 255, 0, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 0, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridMove 30s linear infinite;
+  will-change: transform;
+}
+
+.cyberLines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+      circle at 20% 80%,
+      rgba(0, 255, 0, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(circle at 80% 20%, rgba(0, 255, 0, 0.1) 0%, transparent 50%);
+  animation: cyberPulse 10s ease-in-out infinite;
+}
+
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(2px 2px at 20px 30px, #00ff00, transparent),
+    radial-gradient(2px 2px at 40px 70px, #00ff00, transparent),
+    radial-gradient(1px 1px at 90px 40px, #00ff00, transparent);
+  background-repeat: repeat;
+  background-size: 200px 100px;
+  animation: particleFloat 20s linear infinite;
+  opacity: 0.2;
+  will-change: transform;
+}
+
+/* Matrix Rain Effect - Optimized */
+.matrixChar {
+  position: absolute;
+  color: #00ff00;
+  font-size: 1rem;
+  font-weight: bold;
+  text-shadow: 0 0 3px #00ff00;
+  animation: matrixFall linear infinite;
+  z-index: 2;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Main Content - Optimized */
+.content {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translate3d(0, 30px, 0);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  overflow: hidden;
+}
+
+.content.loaded {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Header */
+.header {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+}
+
+.logoText {
+  color: #ffffff;
+}
+
+.logoAccent {
+  color: #00ff00;
+  animation: logoGlow 3s ease-in-out infinite alternate;
+}
+
+.logoGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(0, 255, 0, 0.2) 0%, transparent 70%);
+  animation: logoPulse 4s ease-in-out infinite;
+  z-index: -1;
+}
+
+/* Hero Section */
+.hero {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.heroContent {
+  max-width: 800px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.title {
+  font-size: 4rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  line-height: 1.2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow: hidden;
+}
+
+.titleLine {
+  opacity: 0;
+  transform: translate3d(-50px, 0, 0);
+  animation: titleSlideIn 0.8s ease-out forwards;
+  overflow: hidden;
+}
+
+.titleLine:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.titleLine:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.titleLine:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.titleAccent {
+  color: #00ff00;
+  text-shadow: 0 0 30px #00ff00;
+  animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #cccccc;
+  margin-bottom: 3rem;
+  line-height: 1.6;
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  animation: subtitleFadeIn 0.8s ease-out 0.8s forwards;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Features */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+  opacity: 0;
+  transform: translate3d(0, 30px, 0);
+  animation: featuresSlideIn 0.8s ease-out 1s forwards;
+  overflow: hidden;
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: rgba(26, 26, 26, 0.8);
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  border-radius: 8px;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
+  overflow: hidden;
+}
+
+.feature:hover {
+  transform: translate3d(0, -5px, 0);
+  border-color: #00ff00;
+  box-shadow: 0 10px 30px rgba(0, 255, 0, 0.2);
+}
+
+.featureIcon {
+  font-size: 2.5rem;
+  filter: drop-shadow(0 0 10px rgba(0, 255, 0, 0.5));
+}
+
+.feature span {
+  font-size: 1rem;
+  color: #ffffff;
+  text-align: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* CTA Section */
+.ctaSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0;
+  transform: translate3d(0, 30px, 0);
+  animation: ctaSlideIn 0.8s ease-out 1.2s forwards;
+  overflow: hidden;
+}
+
+.startButton {
+  position: relative;
+  padding: 1.5rem 3rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #000000;
+  background: linear-gradient(45deg, #00ff00, #00cc00);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 255, 0, 0.3);
+  will-change: transform;
+  white-space: nowrap;
+}
+
+.startButton:hover {
+  transform: scale3d(1.05, 1.05, 1) translate3d(0, -2px, 0);
+  box-shadow: 0 15px 40px rgba(0, 255, 0, 0.5);
+}
+
+.startButton:active {
+  transform: scale3d(0.98, 0.98, 1);
+}
+
+.buttonText {
+  position: relative;
+  z-index: 2;
+}
+
+.buttonIcon {
+  position: relative;
+  z-index: 2;
+  font-size: 1.5rem;
+  animation: buttonArrow 3s ease-in-out infinite;
+}
+
+.buttonGlow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(0, 255, 0, 0.3) 0%, transparent 70%);
+  animation: buttonPulse 3s ease-in-out infinite;
+  z-index: 1;
+}
+
+.buttonParticles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(1px 1px at 20% 50%, #ffffff, transparent),
+    radial-gradient(1px 1px at 80% 50%, #ffffff, transparent);
+  animation: particleSparkle 2s ease-in-out infinite;
+  z-index: 1;
+}
+
+.buttonHint {
+  color: #888888;
+  font-size: 0.9rem;
+  text-align: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.buttonHint kbd {
+  background: #333333;
+  border: 1px solid #666666;
+  border-radius: 4px;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+  color: #00ff00;
+}
+
+/* Footer */
+.footer {
+  padding: 2rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.footerContent {
+  max-width: 600px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.footerText {
+  color: #888888;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.footerLinks {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
+.footerLinks span {
+  color: #666666;
+  font-size: 0.8rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Floating Elements - Optimized */
+.floatingElements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+  overflow: hidden;
+}
+
+.floatingIcon {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.1;
+  animation: float 8s ease-in-out infinite;
+  will-change: transform;
+}
+
+.floatingIcon:nth-child(1) {
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.floatingIcon:nth-child(2) {
+  top: 20%;
+  right: 15%;
+  animation-delay: 2s;
+}
+
+.floatingIcon:nth-child(3) {
+  top: 60%;
+  left: 5%;
+  animation-delay: 4s;
+}
+
+/* Optimized Animations */
+@keyframes gridMove {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(50px, 50px, 0);
+  }
+}
+
+@keyframes cyberPulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, -100px, 0);
+  }
+}
+
+@keyframes matrixFall {
+  0% {
+    transform: translate3d(0, -100vh, 0);
+  }
+  100% {
+    transform: translate3d(0, 100vh, 0);
+  }
+}
+
+@keyframes titleSlideIn {
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes titleGlow {
+  from {
+    text-shadow: 0 0 30px #00ff00;
+  }
+  to {
+    text-shadow: 0 0 40px #00ff00;
+  }
+}
+
+@keyframes subtitleFadeIn {
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes featuresSlideIn {
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes ctaSlideIn {
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes logoGlow {
+  from {
+    text-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+  }
+  to {
+    text-shadow: 0 0 30px rgba(0, 255, 0, 0.7);
+  }
+}
+
+@keyframes logoPulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes buttonArrow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(3px, 0, 0);
+  }
+}
+
+@keyframes buttonPulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes particleSparkle {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0, -15px, 0) rotate(3deg);
+  }
+}
+
+/* Responsive Design - Optimized */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .features {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+
+  .feature {
+    padding: 1rem;
+  }
+
+  .featureIcon {
+    font-size: 2rem;
+  }
+
+  .startButton {
+    padding: 1.2rem 2.5rem;
+    font-size: 1.1rem;
+  }
+
+  .footerLinks {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  /* Reduce animations on mobile for better performance */
+  .gridOverlay {
+    animation: gridMove 40s linear infinite;
+  }
+
+  .cyberLines {
+    animation: cyberPulse 15s ease-in-out infinite;
+  }
+
+  .particles {
+    animation: particleFloat 30s linear infinite;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .logo {
+    font-size: 2rem;
+  }
+
+  .hero {
+    padding: 1rem;
+  }
+
+  .header {
+    padding: 1rem;
+  }
+
+  .footer {
+    padding: 1rem;
+  }
+
+  .floatingIcon {
+    font-size: 1.5rem;
+  }
+
+  /* Disable some animations on very small screens */
+  .floatingElements {
+    display: none;
+  }
+
+  .matrixChar {
+    font-size: 0.8rem;
+  }
+}
+
+/* Landscape orientation - Optimized */
+@media (max-height: 600px) and (orientation: landscape) {
+  .hero {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    margin-bottom: 1.5rem;
+  }
+
+  .features {
+    margin-bottom: 2rem;
+  }
+
+  .ctaSection {
+    gap: 0.5rem;
+  }
+
+  /* Reduce floating elements in landscape */
+  .floatingElements {
+    display: none;
+  }
+}
+
+/* Performance optimizations for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .matrixChar {
+    animation: none;
+  }
+
+  .floatingElements {
+    display: none;
+  }
+}
